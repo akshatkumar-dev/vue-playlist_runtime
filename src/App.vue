@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <navbar></navbar>
-    <router-view></router-view>
+    <!-- <navbar></navbar> -->
+    <!-- <router-view></router-view> -->
+    <runtime/>
   </div>
 </template>
 
 <script>
-import Navbar from './components/NavBar'
+// import Navbar from './components/NavBar'
+import Runtime from "./components/Runtime"
 export default {
   name: 'App',
   components:{
-    "navbar":Navbar
+    "runtime":Runtime
+    // "navbar":Navbar
     }
 }
 </script>
