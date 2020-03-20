@@ -6,28 +6,28 @@
         <div class="card">
         <input type="url" placeholder="https://www.youtube.com/playlist?list=PLBCF2DAC6FFB574DE" v-model="url"/> <br/>
         <p class="click-p" @click="getdetails">Get Details</p>
-        <!-- <p v-if="details.title.length!==0">{{details.title}}</p>
-        <p v-if="details.duration.length!==0">{{details.duration}}</p>
-        <p v-if="details.totalCount!==0">{{details.totalCount}}</p>
-        <p v-if="details.by.length!==0">{{details.by}}</p>
-        <img v-if="details.img.length!==0" :src="details.img" alt="thumbnail preview"/> -->
-        <div class="details">
-        <img src="https://i.ytimg.com/vi/_ey_1I1aJ5w/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLAYGdWBfE4oBVeCJa_FHPJAMQiFXA" alt="sample" height="150px">
+        <div class="details" v-if="details.duration.length!==0">
+        <img :src="details.img" alt="thumbnail preview" height="150px"/>
         <div class="details-text">
-        <p class="details-element"><strong>Playlist Title:</strong> Angry Masterji Series jfakldf jakdlfja jkfaldjf ladfkjla d jkaldf jkaljdf klad jlka dsj</p>
-        <p class="details-element"><strong>Owner:</strong> BB Ki Vines</p>
-        <p class="details-element"><strong>Total Videos:</strong> 14</p>
-        <p class="details-element"><strong>Total Runtime:</strong> 01:21:15</p>
+        <p class="details-element"><strong>Playlist Title:</strong> {{details.title}}</p>
+        <p class="details-element"><strong>Owner:</strong> {{details.by}}</p>
+        <p class="details-element"><strong>Total Videos:</strong> {{details.totalCount}}</p>
+        <p class="details-element"><strong>Total Runtime:</strong> {{details.duration}}</p>
+        
         </div>
         </div>
-        <p class="error-text" >An error occured please check url or try again later</p>
-        <!-- <p class="error-text" v-if="showError">An error occured please check url or try again later</p> -->
+        <spinner v-if="isLoading"/>
+        <p class="error-text" v-if="showError">An error occured please check url or try again later</p>
         </div>
     </div>
 </template>
 <script>
 import axios from "axios";
+import Spinner from "./Spinner"
 export default {
+    components:{
+        "spinner":Spinner
+    },
     data:function(){
         return {
             url: "",
@@ -38,22 +38,20 @@ export default {
                 totalCount:0,
                 img:"",
                 by:""
-            }
+            },
+            isLoading: false
         }
     },
     methods:{
         getdetails:async function(){
-            //by: "BB Ki Vines"
-            //img: "https://i.ytimg.com/vi/_ey_1I1aJ5w/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLAYGdWBfE4oBVeCJa_FHPJAMQiFXA"
-            //time: "01:21:15"
-            //title: "Angry Masterji Series"
-            //totalResults: 14
+            this.isLoading = true;
             if(this.url.length === 0){
                 this.showError = true;
                 return;
             }
             let response = await axios.get(`http://localhost:4000/api/getruntime?url=${this.url}`);
             this.showError = false;
+            this.isLoading = false;
             if(response.data === "error"){
                 this.showError = true;
             }
@@ -113,8 +111,11 @@ export default {
     .click-p:hover{
         background-color: #26d9d0;
         cursor: pointer;
-        box-shadow: 1px 1px 5px grey;
         }
+    .click-p:active{
+        box-shadow: 1px 1px 5px grey;
+
+    }
     .card{
         width: 80%;
         box-shadow: 10px 10px 40px #e6e6e6;
