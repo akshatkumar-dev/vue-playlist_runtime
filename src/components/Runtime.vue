@@ -14,7 +14,7 @@
         <div class="details">
         <img src="https://i.ytimg.com/vi/_ey_1I1aJ5w/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLAYGdWBfE4oBVeCJa_FHPJAMQiFXA" alt="sample" height="150px">
         <div class="details-text">
-        <p class="details-element"><strong>Playlist Title:</strong> Angry Masterji Series</p>
+        <p class="details-element"><strong>Playlist Title:</strong> Angry Masterji Series jfakldf jakdlfja jkfaldjf ladfkjla d jkaldf jkaljdf klad jlka dsj</p>
         <p class="details-element"><strong>Owner:</strong> BB Ki Vines</p>
         <p class="details-element"><strong>Total Videos:</strong> 14</p>
         <p class="details-element"><strong>Total Runtime:</strong> 01:21:15</p>
@@ -132,6 +132,7 @@ export default {
         align-items: center;
         }
     .details-element{
+        
         margin:0.5rem;
         margin-left: 1rem;
         padding:0.5rem;
@@ -143,5 +144,35 @@ export default {
         display:flex;
         flex-direction: column;
         align-items: flex-start;
+    }
+    /* img{
+        max-width: 100%;
+    } */
+
+    @media screen and (max-width: 900px){
+        .card{
+            width: 100%;
+            }
+        .details{
+            width: 100%;
+        }
+    }
+    @media screen and (max-width: 750px){
+        .click-p{
+            width: 50%;
+        }
+        input{
+            width: 90%;
+        }
+    }
+    @media screen and (max-width: 650px){
+        .details{
+            flex-direction: column;
+        }
+    }
+    @media screen and (max-width: 400px){
+        img{
+            max-width: 100%;
+        }
     }
 </style>
